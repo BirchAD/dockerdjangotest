@@ -10,6 +10,7 @@ from rest_framework import status
 
 CREATE_USER_URL = reverse('user:create')
 
+
 def create_user(**params):
     """Create and return a new user."""
     return get_user_model().objects.create_user(**params)
@@ -28,7 +29,7 @@ class PublicUserAPITests(TestCase):
             'password': 'testpass123',
             'name': 'Test Name',
         }
-        res =  self.client.post(CREATE_USER_URL, payload)
+        res = self.client.post(CREATE_USER_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         user = get_user_model().objects.get(email=payload['email'])
@@ -50,9 +51,9 @@ class PublicUserAPITests(TestCase):
     def test_password_too_short_error(self):
         """Test an error is returned if password is less than 5 chars."""
         payload = {
-        'email': 'test_example.com',
-        'password': 'pw',
-        'name': 'Test Name',
+            'email': 'test_example.com',
+            'password': 'pw',
+            'name': 'Test Name',
         }
         res = self.client.post(CREATE_USER_URL, payload)
 
