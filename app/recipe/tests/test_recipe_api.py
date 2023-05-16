@@ -29,7 +29,7 @@ def create_recipe(user, **params):
     }
     defaults.update(params)
 
-    recipe = Recipe.obects.create(user=user, **defaults)
+    recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
 
 
@@ -50,7 +50,7 @@ class PrivateRecipeAPITests(TestCase):
     """Test authenticated API request"""
 
     def setUp(self):
-        self.client = APIClient
+        self.client = APIClient()
         self.user = get_user_model().objects.create_user(
             'user@example.com',
             'testpass123',
