@@ -95,10 +95,13 @@ class PrivateRecipeAPITests(TestCase):
 
     def test_get_recipe_detail(self):
         """Test get recipe detail."""
-        recipe =  create_recipe(user=self.user)
+        recipe = create_recipe(user=self.user)
 
         url = detail_url(recipe.id)
         res = self.client.get(url)
 
         serializer = RecipeDetailSerializer(recipe)
         self.assertEqual(res.data, serializer.data)
+
+    def test_create_recipe(self):
+        """Test creating a recipe."""
